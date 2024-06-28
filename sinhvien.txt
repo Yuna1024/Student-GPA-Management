@@ -1,0 +1,2 @@
+Mã sinh viên:10000 -Họ tên:Dương -Địa chỉ:Hà Nội -SDT:968719518 -Lớp:D16CNPM4
+Mã sinh viên:10001 -Họ tên:Luyện -Địa chỉ:Ninh Bình -SDT:9685485 -Lớp:D17=6CNPM5

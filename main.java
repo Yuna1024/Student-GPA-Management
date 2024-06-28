@@ -1,4 +1,8 @@
 import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.Scanner;
 
 public class main {
@@ -68,10 +72,12 @@ public class main {
                     tinhDiemTongKet();
                     pause();
                     break;
-//                case 10:
-//                    luuVaoFile();
-//                    pause();
-//                    break;
+                case 10:
+                    luuDanhSachSinhVien();
+                    luuDanhSachMonHoc();
+                    luuDanhSachBangDiem();
+                    pause();
+                    break;
                 case 0:
                     System.out.println("Thoát chương trình!");
                     break;
@@ -259,6 +265,65 @@ public class main {
         }return null;
     }
 
+    private  static  void luuDanhSachSinhVien(){
+        try (FileOutputStream fos = new FileOutputStream("sinhvien.txt");
+             OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+             BufferedWriter bw = new BufferedWriter(osw)) {
+
+            for (int i = 0; i < soLuongSinhVien; i++) {
+                SinhVien sv = sinhViens[i];
+                String line = "Mã sinh viên:"+sv.getMaSv()+
+                        " -Họ tên:"+ sv.getHoTen()+
+                        " -Địa chỉ:"+sv.getDiaChi()+
+                        " -SDT:"+ sv.getSDT()+
+                        " -Lớp:"+ sv.getLop();
+                bw.write(line);
+                bw.newLine();
+            }
+
+            System.out.println("Danh sách sinh viên đã được lưu vào file.");
+
+        } catch (IOException e) {
+            System.out.println("Lỗi khi lưu danh sách sinh viên: " + e.getMessage());
+        }
+    }
+
+    private static void luuDanhSachMonHoc()  {
+        try(FileOutputStream fos = new FileOutputStream("monhoc.txt");
+        OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8");
+        BufferedWriter bw = new BufferedWriter(osw)){
+
+            for (int i=0 ;i <soLuongMonHoc;i++){
+                MonHoc mh = monHocs[i];
+                String line = "\nnMã môn học: "+mh.getMaMh()+
+                        "\nTên môn: "+mh.getTenMon()+
+                        " \nSố đơn vị học trình: "+mh.getSoDonViHocTrinh()+
+                        " \nLoại môn:" +mh.getLoaiMon();
+                bw.write(line);
+                bw.newLine();
+            }
+        }catch (IOException e){
+            System.out.println("Lỗi khi lưu danh sách môn học: " + e.getMessage());
+        }
+    }
+
+
+    private static void luuDanhSachBangDiem(){
+        try(FileOutputStream fos = new FileOutputStream("bangdiem.txt");
+        OutputStreamWriter osw = new OutputStreamWriter(fos,"UTF-8");
+        BufferedWriter bw = new BufferedWriter(osw)){
+
+
+            for (int i = 0;i< soLuongBangDiem;i++){
+                BangDiem bd = bangDiems[i];
+                String line = "\nTên sinh viên: "+bd.getSinhVien().getHoTen()+
+                        "\nMôn học: " +bd.getMonHoc().getTenMon()+
+                        "\nĐiểm: " +bd.getSoDiem();
+            }
+        }catch (IOException e){
+            System.out.println("Lỗi khi lưu danh sách môn học: " + e.getMessage());
+        }
+    }
 
     public static void pause(){
         System.out.print("Nhấn enter để tiếp tục ...\n");
